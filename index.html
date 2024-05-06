@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test - Shadow Root</title>
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+        label {
+            display: block;
+            margin: 1em;
+        }
+        input {
+            background-color: lightgreen;
+        }
+    </style>
+</head>
+<body>
+    <form action="#">
+        <div class="workzone">
+            <label>
+                User : <input type="text" name="username" />
+            </label>
+            <label>
+                Password : <input type="password" name="password" />
+            </label>
+        </div>
+
+        <label>
+            <input type="checkbox" id="cb-shadow"/> Wrap inputs in shadow DOM<br>
+            <small>This is what <a href="https://material-web.dev/about/intro/#what-are-web-components" target="_blank">web-component libraries, such as material-web, does</a></small>
+        </label>
+
+        <button type="submit">
+          Go !
+        </button>
+    </form>
+
+    <!-- ====================== -->
+    <script>
+        const checkBox = document.querySelector('input#cb-shadow');
+        const workzone = document.querySelector('.workzone');
+        const originalHTML = workzone.innerHTML;
+
+        /**
+         * Wrap the passed <input> into a Shadow-DOM.
+         * Material-web does the same
+         */
+        function wrapIntoShadow(inputElement){
+            const parent = inputElement.parentElement;
+
+            const span = document.createElement('span');
+            span.className = 'shadow-wrap';
+            const shadowDom = span.attachShadow({ mode: "open" });
+
+            const style = document.createElement('style');
+            style.innerHTML = 'input { background-color: gold; }';
+            shadowDom.appendChild(style);
+
+            shadowDom.appendChild(inputElement);
+            parent.appendChild(span);
+        }
+
+        /**
+         * Sync the state of the form DOM depending of the checkbox state
+         */
+        function update() {
+            if(checkBox.checked) {
+                // If checked, wrap username / password fields into a shadow DOM
+                workzone.querySelectorAll('input').forEach(wrapIntoShadow);
+            } else {
+                // If Unchecked, revert any JS alterations of the workzone by putting (back) the original HTML in place
+                workzone.innerHTML = originalHTML;
+            }
+        }
+
+        // Trigger update() at startup, and when checkbox changes
+        checkBox.addEventListener('change', update);
+        update();
+    </script>
+</body>
+</html>
