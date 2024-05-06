@@ -12,7 +12,8 @@ See
 
 ## Simple demo
 
-This small demo reproduces this behavior.
+This small demo reproduces this behavior :  
+<https://jimetevenard.github.io/Shadow-DOM-Demo/>
 
 It has two classical username/password inputs.  
 It is detected as a login form by most autofiller.
