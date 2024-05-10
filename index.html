@@ -18,6 +18,10 @@
     </style>
 </head>
 <body>
+    <h1>Shadow-DOM test login form</h1>
+    <p>A small test-case of wrapping the inputs of a login form into Shadow-DOM, to test the behavior of autofill of password managers</p>
+    <p>This is what <a href="https://material-web.dev/about/intro/#what-are-web-components" target="_blank">web-component libraries, such as material-web, does</a></p>
+
     <form action="#">
         <div class="workzone">
             <label>
@@ -29,8 +33,8 @@
         </div>
 
         <label>
-            <input type="checkbox" id="cb-shadow"/> Wrap inputs in shadow DOM<br>
-            <small>This is what <a href="https://material-web.dev/about/intro/#what-are-web-components" target="_blank">web-component libraries, such as material-web, does</a></small>
+            <input type="checkbox" id="cb-shadow"/> <strong>Check this box</strong> to wrap inputs in shadow DOM<br>
+            <small>The background of the fields will then become <strong style="color: gold;">gold</strong> to make it visible.</small>
         </label>
 
         <button type="submit">
